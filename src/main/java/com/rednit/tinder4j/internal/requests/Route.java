@@ -1,5 +1,6 @@
 package com.rednit.tinder4j.internal.requests;
 
+@SuppressWarnings("unused")
 public class Route {
 
     public static class Self {
