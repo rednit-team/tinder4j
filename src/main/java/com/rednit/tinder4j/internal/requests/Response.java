@@ -2,6 +2,7 @@ package com.rednit.tinder4j.internal.requests;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Response implements Closeable {
 
@@ -15,9 +16,9 @@ public class Response implements Closeable {
 
     public String body() {
         try {
-            return rawResponse.body().string();
-        } catch (IOException e) {
-            return "N/A";
+            return Objects.requireNonNull(rawResponse.body()).string();
+        } catch (IOException | NullPointerException e) {
+            return "{}";
         }
     }
 

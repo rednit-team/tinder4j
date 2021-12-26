@@ -31,7 +31,6 @@ public class Requester {
     public <T> void request(Request<T> request) {
         String url = baseURL + request.getCompiledRoute().getRoute();
         Route.Method method = request.getCompiledRoute().getMethod();
-        url = "https://google.com";
         log.debug("Sending {} request to {}", method.name(), url);
 
         okhttp3.Request.Builder builder = new okhttp3.Request.Builder()
