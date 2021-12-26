@@ -1,7 +1,5 @@
 package com.rednit.tinder4j.internal.requests;
 
-
-
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import org.slf4j.Logger;

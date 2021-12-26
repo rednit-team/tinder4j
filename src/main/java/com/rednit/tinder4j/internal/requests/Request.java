@@ -51,7 +51,6 @@ public class Request<T> {
     public void onFailure(Throwable throwable) {
         client.getCallbackPool().execute(() -> {
             try (CallbackContext ignored = CallbackContext.getInstance()) {
-                CallbackContext.getInstance();
                 onFailure.accept(throwable);
             } catch (Throwable t) {
                 log.error("Encountered error while processing failure consumer!", t);

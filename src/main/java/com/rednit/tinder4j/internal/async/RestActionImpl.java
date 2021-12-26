@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -64,7 +65,11 @@ public class RestActionImpl<T> implements RestAction<T> {
             throw new IllegalStateException("Preventing use of complete() in callback threads! This operation can be a deadlock cause!");
         }
         try {
-            return new RestFuture<>(this, route, data).join();
+            CompletableFuture<T> future = new CompletableFuture<>();
+            client.getRequester().request(new Request<>(
+                    this, future::complete, future::completeExceptionally, route, data
+            ));
+            return future.join();
         } catch (CompletionException e) {
             e.printStackTrace();
             throw e;
