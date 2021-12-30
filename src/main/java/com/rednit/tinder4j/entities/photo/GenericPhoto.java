@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public abstract class GenericPhoto extends Entity {
+public class GenericPhoto extends Entity {
 
     private final Algorithm.CropInfo cropInfo;
     private final String url;
@@ -18,7 +18,7 @@ public abstract class GenericPhoto extends Entity {
     private final String type;
 
     @SuppressWarnings("unchecked")
-    protected GenericPhoto(DataObject photo, TinderClient client) {
+    public GenericPhoto(DataObject photo, TinderClient client) {
         super(photo, client);
         cropInfo = new Algorithm.CropInfo(photo.getObject("crop_info"));
         url = photo.getString("url");
