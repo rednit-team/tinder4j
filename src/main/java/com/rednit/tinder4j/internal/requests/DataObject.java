@@ -96,6 +96,10 @@ public class DataObject {
         return get(key, Long.class);
     }
 
+    public Float getFloat(String key) {
+        return get(key, Float.class);
+    }
+
     public DataObject remove(String key) {
         data.remove(key);
         return this;
