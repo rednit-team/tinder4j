@@ -19,8 +19,8 @@ public abstract class Attachment {
 
         private final String url;
 
-        protected GIFAttachment(DataObject attachment, AttachmentType type) {
-            super(type);
+        protected GIFAttachment(DataObject attachment) {
+            super(AttachmentType.GIF);
             url = attachment.getString("fixed_height");
         }
 
@@ -35,8 +35,8 @@ public abstract class Attachment {
         private final String contact_type;
         private final String url;
 
-        protected ContactCardAttachment(DataObject attachment, AttachmentType type) {
-            super(type);
+        protected ContactCardAttachment(DataObject attachment) {
+            super(AttachmentType.CONTACT_CARD);
             contact_id = attachment.getString("contact_id");
             contact_type = attachment.getString("contact_type");
             url = attachment.getString("deeplink");
@@ -59,8 +59,8 @@ public abstract class Attachment {
 
         private final Spotify.SpotifySongAttachment song;
 
-        protected SongAttachment(DataObject attachment, AttachmentType type) {
-            super(type);
+        protected SongAttachment(DataObject attachment) {
+            super(AttachmentType.SONG);
             song = new Spotify.SpotifySongAttachment(attachment.getObject("song"));
         }
 
