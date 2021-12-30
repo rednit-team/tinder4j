@@ -1,4 +1,4 @@
-package com.rednit.tinder4j.entities;
+package com.rednit.tinder4j.entities.message;
 
 import com.rednit.tinder4j.entities.socials.Spotify;
 import com.rednit.tinder4j.internal.requests.DataObject;

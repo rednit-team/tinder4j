@@ -1,8 +1,9 @@
-package com.rednit.tinder4j.entities;
+package com.rednit.tinder4j.entities.message;
 
 import com.rednit.tinder4j.TinderClient;
+import com.rednit.tinder4j.entities.Entity;
 import com.rednit.tinder4j.internal.requests.DataObject;
-import com.rednit.tinder4j.entities.Attachment.AttachmentType;
+import com.rednit.tinder4j.entities.message.Attachment.AttachmentType;
 
 import java.util.Optional;
 
