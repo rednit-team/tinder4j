@@ -6,6 +6,7 @@ import com.rednit.tinder4j.internal.requests.DataObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public abstract class GenericPhoto extends Entity {
 
@@ -16,12 +17,15 @@ public abstract class GenericPhoto extends Entity {
     private final String extension;
     private final String type;
 
-    public GenericPhoto(DataObject photo, TinderClient client) {
+    @SuppressWarnings("unchecked")
+    protected GenericPhoto(DataObject photo, TinderClient client) {
         super(photo, client);
         cropInfo = new Algorithm.CropInfo(photo.getObject("crop_info"));
         url = photo.getString("url");
         processedFiles = new ArrayList<>();
-        photo.getArray("processedFiles").forEach(object -> {});
+        photo.getArray("processedFiles").forEach(object ->
+                processedFiles.add(new SizedImage(new DataObject((Map<String, Object>) object)))
+        );
         fileName = photo.getString("fileName");
         extension = photo.getString("extension");
 
