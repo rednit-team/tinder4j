@@ -75,6 +75,27 @@ public class DataObject {
         return data.get(key);
     }
 
+    public <T> T get(String key, Class<T> type) {
+        return type.cast(data.get(key));
+    }
+
+    public String getString(String key) {
+        return get(key, String.class);
+    }
+
+    public Boolean getBoolean(String key) {
+        return get(key, Boolean.class);
+
+    }
+
+    public Integer getInteger(String key) {
+        return get(key, Integer.class);
+    }
+
+    public Long getLong(String key) {
+        return get(key, Long.class);
+    }
+
     public DataObject remove(String key) {
         data.remove(key);
         return this;
