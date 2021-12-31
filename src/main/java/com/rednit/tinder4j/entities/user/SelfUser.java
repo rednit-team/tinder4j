@@ -60,7 +60,7 @@ public class SelfUser extends GenericUser {
         position = new Metadata.Position(user.getObject("pos"));
         positionInfo = new Metadata.PositionInfo(user.getObject("pos_info"));
 
-        if (user.hasKey("school")) {
+        if (!user.getArray("school").isEmpty()) {
             school = user.getArray("schools").getObject(0).getString("name");
         } else {
             school = null;
