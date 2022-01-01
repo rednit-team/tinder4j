@@ -8,6 +8,7 @@ import com.rednit.tinder4j.internal.async.RestAction;
 import com.rednit.tinder4j.internal.async.RestActionImpl;
 import com.rednit.tinder4j.internal.requests.DataObject;
 import com.rednit.tinder4j.internal.requests.Route;
+import com.rednit.tinder4j.utils.MessageCacheView;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
@@ -32,6 +33,7 @@ public class Match extends Entity {
     private final MatchPhoto likedContent;
     private final boolean seen;
     private final String lastSeenMessageId;
+    private final MessageCacheView messageCacheView;
 
     public Match(DataObject match, TinderClient client) {
         super(match, client);
@@ -74,6 +76,7 @@ public class Match extends Entity {
             seen = false;
             lastSeenMessageId = null;
         }
+        messageCacheView = new MessageCacheView(getId(), getClient());
     }
 
     public boolean isClosed() {
@@ -142,6 +145,10 @@ public class Match extends Entity {
 
     public Optional<String> getLastSeenMessageId() {
         return Optional.ofNullable(lastSeenMessageId);
+    }
+
+    public MessageCacheView getMessageCacheView() {
+        return messageCacheView;
     }
 
     public RestAction<Message> sendMessage(String content) {

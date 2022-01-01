@@ -44,7 +44,10 @@ public class Route {
         public static final Route DELETE_MATCH = new Route(Method.DELETE, "match/{id}");
         public static final Route SEND_MESSAGE = new Route(Method.POST, "user/matches/{id}");
         public static final Route GET_MESSAGES = new Route(
-                Method.GET, "/v2/matches{id}/messages?count={count}&page_token={page_token}"
+                Method.GET, "/v2/matches/{id}/messages?count={count}"
+        );
+        public static final Route GET_MESSAGES_PAGE = new Route(
+                Method.GET, "/v2/matches/{id}/messages?count={count}&page_token={page_token}"
         );
 
     }

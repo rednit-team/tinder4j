@@ -64,16 +64,11 @@ public class RestActionImpl<T> implements RestAction<T> {
         if (CallbackContext.isCallbackContext()) {
             throw new IllegalStateException("Preventing use of complete() in callback threads! This operation can be a deadlock cause!");
         }
-        try {
-            CompletableFuture<T> future = new CompletableFuture<>();
-            client.getRequester().request(new Request<>(
-                    this, future::complete, future::completeExceptionally, route, data
-            ));
-            return future.join();
-        } catch (CompletionException e) {
-            e.printStackTrace();
-            throw e;
-        }
+        CompletableFuture<T> future = new CompletableFuture<>();
+        client.getRequester().request(new Request<>(
+                this, future::complete, future::completeExceptionally, route, data
+        ));
+        return future.join();
     }
 
     public void handleResponse(Response response, Request<T> request) {
