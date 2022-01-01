@@ -3,6 +3,7 @@ package com.rednit.tinder4j.entities.user;
 import com.rednit.tinder4j.TinderClient;
 import com.rednit.tinder4j.entities.Entity;
 import com.rednit.tinder4j.entities.photo.GenericPhoto;
+import com.rednit.tinder4j.entities.user.swipeable.UserProfile;
 import com.rednit.tinder4j.internal.async.RestAction;
 import com.rednit.tinder4j.internal.async.RestActionImpl;
 import com.rednit.tinder4j.internal.requests.DataObject;
@@ -48,8 +49,10 @@ public abstract class GenericUser extends Entity {
         );
     }
 
-    public RestAction<Object> getUserProfile() {
-        return new RestActionImpl<>(getClient(), Route.User.GET_USER.compile(getId()), (response, request) -> null);
+    public RestAction<UserProfile> getUserProfile() {
+        return new RestActionImpl<>(getClient(), Route.User.GET_USER.compile(getId()), (response, request) ->
+             new UserProfile(DataObject.fromJson(response.body()), getClient())
+        );
     }
 
     public RestAction<Void> report(String cause, String text) {
