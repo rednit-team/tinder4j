@@ -14,8 +14,8 @@ jobs:
           fetch-depth: 0
       - name: Generate Documentation
         run: |
-        mkdir ../docs
-        mvn javadoc:aggregate
+          mkdir ../docs
+          mvn javadoc:aggregate
       - name: Checkout Docs Branch
         run: git checkout docs
       - name: Move Files
