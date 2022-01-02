@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Subtype of {@link GenericUser} for users the self user has a match with.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @see GenericUser
+ * @since 1.0.0
+ */
 public class MatchedUser extends GenericUser {
 
     private final String birthDateInfo;
@@ -17,6 +25,12 @@ public class MatchedUser extends GenericUser {
     private final boolean isTravelling;
     private final List<MatchPhoto> photos;
 
+    /**
+     * Constructs a new MatchedUser.
+     *
+     * @param user   the {@link DataObject} to construct the MatchedUser from
+     * @param client the corresponding {@link TinderClient} instance
+     */
     @SuppressWarnings("unchecked")
     public MatchedUser(DataObject user, TinderClient client) {
         super(user, client);
@@ -43,26 +57,58 @@ public class MatchedUser extends GenericUser {
         );
     }
 
+    /**
+     * Gets the birthdate information. The value of this field is always:
+     * <em>fuzzy birth date active, not displaying real birth_date</em>.
+     *
+     * @return the birthdate information
+     */
     public String getBirthDateInfo() {
         return birthDateInfo;
     }
 
+    /**
+     * Gets the last time the user was online.
+     *
+     * @return the last time the user was online
+     */
     public String getLastOnline() {
         return lastOnline;
     }
 
-    public boolean isHideAge() {
+    /**
+     * Whether the age of the user should be hidden
+     *
+     * @return {@code true} if the age of the user should be hidden
+     */
+    public boolean hideAge() {
         return hideAge;
     }
 
-    public boolean isHideDistance() {
+    /**
+     * Whether the distance of the user should be hidden
+     *
+     * @return {@code true} if the distance of the user should be hidden
+     */
+    public boolean hideDistance() {
         return hideDistance;
     }
 
+    /**
+     * Whether the user is travelling
+     *
+     * @return {@code true} if the user is travelling
+     */
     public boolean isTravelling() {
         return isTravelling;
     }
 
+    /**
+     * Gets a {@link List} of {@link MatchPhoto MatchPhotos}. {@link MatchPhoto MatchPhotos} have more information
+     * than {@link com.rednit.tinder4j.entities.photo.GenericPhoto GenericPhotos}.
+     *
+     * @return a {@link List} of {@link MatchPhoto MatchPhotos}
+     */
     public List<MatchPhoto> getMatchPhotos() {
         return photos;
     }

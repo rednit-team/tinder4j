@@ -7,6 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Subtype of {@link GenericPhoto}. This type of photo can be only present inside a
+ * {@link com.rednit.tinder4j.entities.Match Match} or a
+ * {@link com.rednit.tinder4j.entities.user.MatchedUser MatchedUser}.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @see GenericPhoto
+ * @since 1.0.0
+ */
 public class MatchPhoto extends GenericPhoto {
 
     private final List<SizedImage> assets;
@@ -15,6 +25,12 @@ public class MatchPhoto extends GenericPhoto {
     private final double score;
     private final int winCount;
 
+    /**
+     * Constructs a new MatchPhoto.
+     *
+     * @param photo  the {@link DataObject} to construct the MatchPhoto from
+     * @param client the corresponding {@link TinderClient} instance
+     */
     @SuppressWarnings("unchecked")
     public MatchPhoto(DataObject photo, TinderClient client) {
         super(photo, client);
@@ -25,7 +41,7 @@ public class MatchPhoto extends GenericPhoto {
 
         if (getType().equals("image")) {
             if (!photo.hasKey("webp_qf")) {
-               webpQf = 0;
+                webpQf = 0;
             } else {
                 webpQf = (int) photo.get("webp_qf", List.class).get(0);
             }
@@ -40,10 +56,22 @@ public class MatchPhoto extends GenericPhoto {
         }
     }
 
+    /**
+     * Whether this MatchPhoto has assets.
+     *
+     * @return {@code true} if this MatchPhoto has assets
+     * @see MatchPhoto#getAssets()
+     */
     public boolean hasAssets() {
         return !assets.isEmpty();
     }
 
+    /**
+     * Gets a possibly empty {@link List} of {@link SizedImage SizedImages}. Each {@link SizedImage} has the same
+     * resolution, but a different zoom level on the phase.
+     *
+     * @return a possibly empty {@link List} of {@link SizedImage SizedImages}
+     */
     public List<SizedImage> getAssets() {
         return assets;
     }

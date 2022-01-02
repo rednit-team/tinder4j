@@ -9,11 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A user that liked the self user.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class LikePreview extends Entity {
 
     private final boolean recentlyActive;
     private final List<GenericPhoto> photos;
 
+    /**
+     * Constructs a new LikePreview.
+     *
+     * @param entity the {@link DataObject} to construct the LikePreview from
+     * @param client the corresponding {@link TinderClient} instance
+     */
     @SuppressWarnings("unchecked")
     public LikePreview(DataObject entity, TinderClient client) {
         super(entity, client);
@@ -28,10 +41,20 @@ public class LikePreview extends Entity {
         }
     }
 
+    /**
+     * Gets a {@link List} of {@link GenericPhoto GenericPhotos} of the user.
+     *
+     * @return a {@link List} of {@link GenericPhoto GenericPhotos}
+     */
     public List<GenericPhoto> getPhotos() {
         return photos;
     }
 
+    /**
+     * Whether the user was recently active.
+     *
+     * @return {@code true} if the user was recently active
+     */
     public boolean isRecentlyActive() {
         return recentlyActive;
     }

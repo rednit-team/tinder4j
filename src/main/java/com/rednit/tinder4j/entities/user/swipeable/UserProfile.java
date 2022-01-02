@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Subtype of {@link SwipeableUser} for a complete user profile.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @see SwipeableUser
+ * @since 1.0.0
+ */
 public class UserProfile extends SwipeableUser {
 
     private final List<String> sexualOrientations;
@@ -16,6 +24,12 @@ public class UserProfile extends SwipeableUser {
     private final boolean hideDistance;
     private final boolean isTravelling;
 
+    /**
+     * Constructs a new UserProfile.
+     *
+     * @param user   the {@link DataObject} to construct the UserProfile from
+     * @param client the corresponding {@link TinderClient} instance
+     */
     @SuppressWarnings("unchecked")
     public UserProfile(DataObject user, TinderClient client) {
         super(user, client);
@@ -40,26 +54,57 @@ public class UserProfile extends SwipeableUser {
         lastOnline = user.getString("ping_time");
     }
 
+    /**
+     * Gets a possibly empty {@link List} of the sexual orientations of a user.
+     *
+     * @return a possibly empty {@link List} of the sexual orientations
+     */
     public List<String> getSexualOrientations() {
         return sexualOrientations;
     }
 
+    /**
+     * Gets the last time the user was online.
+     *
+     * @return the last time the user was online
+     */
     public String getLastOnline() {
         return lastOnline;
     }
 
+    /**
+     * Gets the birthdate information. The value of this field is always:
+     * <em>fuzzy birth date active, not displaying real birth_date</em>.
+     *
+     * @return the birthdate information
+     */
     public String getBirthDateInfo() {
         return birthDateInfo;
     }
 
+    /**
+     * Whether the user uses Tinder University.
+     *
+     * @return {@code true} if the user uses Tinder University
+     */
     public boolean isTinderU() {
         return isTinderU;
     }
 
-    public boolean isHideDistance() {
+    /**
+     * Whether the distance of the user should be hidden
+     *
+     * @return {@code true} if the distance of the user should be hidden
+     */
+    public boolean hideDistance() {
         return hideDistance;
     }
 
+    /**
+     * Whether the user is travelling
+     *
+     * @return {@code true} if the user is travelling
+     */
     public boolean isTravelling() {
         return isTravelling;
     }

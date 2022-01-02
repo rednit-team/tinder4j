@@ -1,6 +1,7 @@
 package com.rednit.tinder4j.utils;
 
 import com.rednit.tinder4j.TinderClient;
+import com.rednit.tinder4j.entities.Match;
 import com.rednit.tinder4j.entities.message.Message;
 import com.rednit.tinder4j.internal.async.CompletedRestAction;
 import com.rednit.tinder4j.internal.async.RestAction;
@@ -12,6 +13,13 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * A simple cache for {@link Match Matches}.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class MessageCacheView implements Iterable<Message> {
 
     private final String matchId;
@@ -20,6 +28,12 @@ public class MessageCacheView implements Iterable<Message> {
     private boolean initialFetchDone;
     private String pageToken;
 
+    /**
+     * Constructs a new MatchCacheView.
+     *
+     * @param matchId client the corresponding match id
+     * @param client  client the corresponding {@link TinderClient} instance
+     */
     public MessageCacheView(String matchId, TinderClient client) {
         messages = new LinkedList<>();
         this.matchId = matchId;
@@ -27,16 +41,30 @@ public class MessageCacheView implements Iterable<Message> {
         initialFetchDone = false;
     }
 
+    /**
+     * Gets a {@link Message} by id. Will request the {@link Message} from the Tinder API, if the {@link Message} is not
+     * present in the cache.
+     *
+     * @param id the id to get the {@link Message} from
+     * @return a {@link RestAction} holding the {@link Message}
+     */
     public RestAction<Message> getMessage(String id) {
         List<Message> filtered = messages.stream().filter(
                 message -> message.getId().equals(id)
         ).collect(Collectors.toList());
         if (filtered.size() == 0) {
-            return new RestActionImpl<>(client, Route.Self.GET_MESSAGE.compile(id));
+            return new RestActionImpl<>(client, Route.Self.GET_MESSAGE.compile(id), (response, request) ->
+                    new Message(DataObject.fromJson(response.body()), client)
+            );
         }
         return new CompletedRestAction<>(filtered.get(0));
     }
 
+    /**
+     * Gets the first 60 {@link Message Messages} of a Match.
+     *
+     * @return a {@link RestAction} holding the first 60 {@link Message Messages}
+     */
     @SuppressWarnings("unchecked")
     public RestAction<List<Message>> getMessages() {
         if (initialFetchDone) {
@@ -57,6 +85,12 @@ public class MessageCacheView implements Iterable<Message> {
         });
     }
 
+    /**
+     * Requests all messages from the Tinder API and fills the cache with them.
+     * <p><b>This method is blocking.</b></p>
+     *
+     * @return a {@link List} of all {@link Message Messages}
+     */
     public List<Message> loadAllMessages() {
         if (pageToken == null && initialFetchDone) {
             return messages;
@@ -93,10 +127,20 @@ public class MessageCacheView implements Iterable<Message> {
         return result;
     }
 
+    /**
+     * Adds a {@link Message} to the cache.
+     *
+     * @param message the {@link Message} to add
+     */
     public void addMessage(Message message) {
         messages.add(message);
     }
 
+    /**
+     * Gets the size of the cache.
+     *
+     * @return the size of the cache
+     */
     public int size() {
         return messages.size();
     }

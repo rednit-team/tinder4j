@@ -11,8 +11,18 @@ import com.rednit.tinder4j.internal.requests.Route;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
+/**
+ * Abstract top level class for users.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public abstract class GenericUser extends Entity {
 
     private final List<GenericPhoto> photos;
@@ -22,6 +32,12 @@ public abstract class GenericUser extends Entity {
     private final Gender gender;
     private final List<String> badges;
 
+    /**
+     * Constructs a new GenericUser.
+     *
+     * @param user   the {@link DataObject} to construct the GenericUser from
+     * @param client the corresponding {@link TinderClient} instance
+     */
     @SuppressWarnings("unchecked")
     protected GenericUser(DataObject user, TinderClient client) {
         super(user, client);
@@ -49,12 +65,25 @@ public abstract class GenericUser extends Entity {
         );
     }
 
+    /**
+     * Gets the {@link UserProfile}. A {@link UserProfile} contains all available information about a user, while this
+     * class and its subtypes may only contain certain information.
+     *
+     * @return the {@link UserProfile} wrapped in a {@link RestAction}
+     */
     public RestAction<UserProfile> getUserProfile() {
         return new RestActionImpl<>(getClient(), Route.User.GET_USER.compile(getId()), (response, request) ->
                 new UserProfile(DataObject.fromJson(response.body()).getObject("results"), getClient())
         );
     }
 
+    /**
+     * Reports the user.
+     *
+     * @param cause the report cause
+     * @param text  the detailed report text
+     * @return {@link RestAction}
+     */
     public RestAction<Void> report(String cause, String text) {
         return new RestActionImpl<>(getClient(), Route.User.REPORT.compile(getId()), RequestBody.create(
                 DataObject.empty().put("cause", cause).put("text", text).toString(),
@@ -62,14 +91,30 @@ public abstract class GenericUser extends Entity {
         ));
     }
 
+    /**
+     * Gets the bio of the user.
+     *
+     * @return the bio of the user
+     */
     public String getBio() {
         return bio;
     }
 
+    /**
+     * Gets the users' birthdate. <em>Note:</em> This does only display the real birthdate if it's the {@link SelfUser}.
+     *
+     * @return the users' birthdate
+     */
     public String getBirthdate() {
         return birthdate;
     }
 
+    /**
+     * Gets the age of the user. Uses {@link GenericUser#getBirthdate()} to calculate the age.
+     *
+     * @return the age of the user
+     * @throws UnsupportedOperationException if the birthdate is not available
+     */
     public int getAge() {
         if (birthdate.length() < 4) {
             throw new UnsupportedOperationException("Birthdate is unavailable!");
@@ -79,22 +124,48 @@ public abstract class GenericUser extends Entity {
         return year - birthYear - 1; // I don't understand Tinder's age calculation, but -1 seems to fix my solution
     }
 
+    /**
+     * Gets the name of the user.
+     *
+     * @return the name of the user
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets the {@link Gender} of the user.
+     *
+     * @return the {@link Gender} of the user.
+     */
     public Gender getGender() {
         return gender;
     }
 
+    /**
+     * Whether this user has badges.
+     *
+     * @return {@code true} if this user has badges
+     * @see GenericUser#getBadges() ()
+     */
     public boolean hasBadges() {
         return !badges.isEmpty();
     }
 
+    /**
+     * Gets a possibly empty {@link List} the badges the user has.
+     *
+     * @return a possibly empty {@link List} the badges
+     */
     public List<String> getBadges() {
         return badges;
     }
 
+    /**
+     * Gets a {@link List} of {@link GenericPhoto GenericPhotos} of the user.
+     *
+     * @return a {@link List} of {@link GenericPhoto GenericPhotos}
+     */
     public List<GenericPhoto> getPhotos() {
         return photos;
     }

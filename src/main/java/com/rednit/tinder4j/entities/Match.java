@@ -14,6 +14,13 @@ import okhttp3.RequestBody;
 
 import java.util.Optional;
 
+/**
+ * Represents a Tinder match.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class Match extends Entity {
 
     private final boolean closed;
@@ -35,6 +42,12 @@ public class Match extends Entity {
     private final String lastSeenMessageId;
     private final MessageCacheView messageCacheView;
 
+    /**
+     * Constructs a new Match.
+     *
+     * @param match  the {@link DataObject} to construct the Match from
+     * @param client the corresponding {@link TinderClient} instance
+     */
     public Match(DataObject match, TinderClient client) {
         super(match, client);
         closed = match.getBoolean("closed");
@@ -79,14 +92,29 @@ public class Match extends Entity {
         messageCacheView = new MessageCacheView(getId(), getClient());
     }
 
+    /**
+     * Whether the match is closed.
+     *
+     * @return {@code true} if the match is closed
+     */
     public boolean isClosed() {
         return closed;
     }
 
+    /**
+     * Gets the date the match was created.
+     *
+     * @return the date the match was created
+     */
     public String getCreatedDate() {
         return createdDate;
     }
 
+    /**
+     * Whether the match is dead.
+     *
+     * @return {@code true} if the match is dead
+     */
     public boolean isDead() {
         return dead;
     }
@@ -95,62 +123,138 @@ public class Match extends Entity {
         return lastActivityDate;
     }
 
+    /**
+     * Whether the match is pending.
+     *
+     * @return {@code true} if the match is pending
+     */
     public boolean isPending() {
         return pending;
     }
 
+    /**
+     * Whether one of the participants used a super like.
+     *
+     * @return {@code true} if one of the participants used a super like
+     */
     public boolean isSuperLike() {
         return isSuperLike;
     }
 
+    /**
+     * Whether one of the participants used a boost.
+     *
+     * @return {@code true} if one of the participants used a boost
+     */
     public boolean isBoostMatch() {
         return isBoostMatch;
     }
 
+    /**
+     * Whether one of the participants used a boost and a super like.
+     *
+     * @return {@code true} if one of the participants used a boost and a super like
+     */
     public boolean isSuperBoostMatch() {
         return isSuperBoostMatch;
     }
 
+    /**
+     * Whether the match is an experiences match.
+     *
+     * @return {@code true} if the match is an experiences match
+     */
     public boolean isExperiencesMatch() {
         return isExperiencesMatch;
     }
 
+    /**
+     * Whether the match is a fast match.
+     *
+     * @return {@code true} if the match is a fast match
+     */
     public boolean isFastMatch() {
         return isFastMatch;
     }
 
+    /**
+     * Whether the self user or the matched user liked first.
+     *
+     * @return {@code true} if the self user liked first
+     */
     public boolean isOpener() {
         return isOpener;
     }
 
+    /**
+     * Whether one of the participants is following. <em>Following what?</em> you ask? Same, bro, same...
+     *
+     * @return {@code true} if one of the participants is following
+     */
     public boolean isFollowing() {
         return following;
     }
 
+    /**
+     * Whether one of the participants is following moments.
+     *
+     * @return {@code true} if one of the participants is following moments
+     */
     public boolean isFollowingMoments() {
         return followingMoments;
     }
 
+    /**
+     * Gets the {@link MatchedUser}.
+     *
+     * @return the {@link MatchedUser}
+     */
     public MatchedUser getMatchedUser() {
         return matchedUser;
     }
 
+    /**
+     * Gets the {@link MatchPhoto} one of the participants liked.
+     *
+     * @return an {@link Optional} holding the {@link MatchPhoto} one of the participants liked
+     */
     public Optional<MatchPhoto> getLikedContent() {
         return Optional.ofNullable(likedContent);
     }
 
+    /**
+     * Whether the match has been seen.
+     *
+     * @return {@code true} if the match has been seen
+     */
     public boolean isSeen() {
         return seen;
     }
 
+    /**
+     * Gets the last seen message id.
+     *
+     * @return an {@link Optional} holding the last seen message id
+     */
     public Optional<String> getLastSeenMessageId() {
         return Optional.ofNullable(lastSeenMessageId);
     }
 
+    /**
+     * Gets the {@link MessageCacheView}.
+     *
+     * @return the {@link MessageCacheView}
+     */
     public MessageCacheView getMessageCacheView() {
         return messageCacheView;
     }
 
+    /**
+     * Sends a message.
+     *
+     * @param content the message to send
+     * @return a {@link RestAction} holding the {@link Message} sent
+     */
     public RestAction<Message> sendMessage(String content) {
         RequestBody body = RequestBody.create(
                 DataObject.empty().put("message", content).toString(),
@@ -164,6 +268,11 @@ public class Match extends Entity {
         );
     }
 
+    /**
+     * Deletes the match.
+     *
+     * @return {@link RestAction}
+     */
     public RestAction<Void> delete() {
         getClient().getMatchCacheView().remove(getId());
         return new RestActionImpl<>(getClient(), Route.Match.DELETE_MATCH.compile(getId()));

@@ -7,6 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Subtype of {@link GenericPhoto}. This type of photo can be only present inside the
+ * {@link com.rednit.tinder4j.entities.user.SelfUser SelfUser}
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @see GenericPhoto
+ * @since 1.0.0
+ */
 public class ProfilePhoto extends GenericPhoto {
 
     private final List<SizedImage> assets;
@@ -20,6 +29,12 @@ public class ProfilePhoto extends GenericPhoto {
     private final Algorithm.Hash pHash;
     private final Algorithm.Hash dHash;
 
+    /**
+     * Constructs a new ProfilePhoto.
+     *
+     * @param photo  the {@link DataObject} to construct the ProfilePhoto from
+     * @param client the corresponding {@link TinderClient} instance
+     */
     @SuppressWarnings("unchecked")
     public ProfilePhoto(DataObject photo, TinderClient client) {
         super(photo, client);
@@ -38,18 +53,40 @@ public class ProfilePhoto extends GenericPhoto {
         dHash = new Algorithm.Hash(photo.getObject("dhash"));
     }
 
+    /**
+     * Whether this MatchPhoto has assets.
+     *
+     * @return {@code true} if this MatchPhoto has assets
+     * @see MatchPhoto#getAssets()
+     */
     public boolean hasAssets() {
         return !assets.isEmpty();
     }
 
+    /**
+     * Gets a possibly empty {@link List} of {@link SizedImage SizedImages}. Each {@link SizedImage} has the same
+     * resolution, but a different zoom level on the phase.
+     *
+     * @return a possibly empty {@link List} of {@link SizedImage SizedImages}
+     */
     public List<SizedImage> getAssets() {
         return assets;
     }
 
+    /**
+     * Gets the date the photo was created.
+     *
+     * @return the date the photo was created
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * Gets the date the photo was updated.
+     *
+     * @return the date the photo was updated
+     */
     public String getUpdatedAt() {
         return updatedAt;
     }

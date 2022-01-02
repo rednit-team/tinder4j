@@ -2,11 +2,18 @@ package com.rednit.tinder4j.entities.message;
 
 import com.rednit.tinder4j.TinderClient;
 import com.rednit.tinder4j.entities.Entity;
-import com.rednit.tinder4j.internal.requests.DataObject;
 import com.rednit.tinder4j.entities.message.Attachment.AttachmentType;
+import com.rednit.tinder4j.internal.requests.DataObject;
 
 import java.util.Optional;
 
+/**
+ * Represents a message inside a Tinder match.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class Message extends Entity {
 
     private final String matchId;
@@ -17,6 +24,12 @@ public class Message extends Entity {
     private final AttachmentType attachmentType;
     private final Attachment attachment;
 
+    /**
+     * Constructs a new Message.
+     *
+     * @param message the {@link DataObject} to construct the message from
+     * @param client  the corresponding {@link TinderClient} instance
+     */
     public Message(DataObject message, TinderClient client) {
         super(message, client);
         matchId = message.getString("match_id");
@@ -54,30 +67,66 @@ public class Message extends Entity {
         }
     }
 
+    /**
+     * Gets the match id.
+     *
+     * @return the match id
+     */
     public String getMatchId() {
         return matchId;
     }
 
+    /**
+     * Gets the date the message was sent.
+     *
+     * @return the date the message was sent
+     */
     public String getSentDate() {
         return sentDate;
     }
 
+    /**
+     * Gets the message content.
+     *
+     * @return the message content
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * Gets the author id.
+     *
+     * @return the author id
+     */
     public String getAuthorId() {
         return authorId;
     }
 
+    /**
+     * Gets the recipient id.
+     *
+     * @return the recipient id
+     */
     public String getRecipientId() {
         return recipientId;
     }
 
+    /**
+     * Gets the {@link AttachmentType AttachmentType}. Returns {@link AttachmentType#NONE AttachmentType.NONE}
+     * if no attachment was sent.
+     *
+     * @return the {@link AttachmentType}
+     */
     public AttachmentType getAttachmentType() {
         return attachmentType;
     }
 
+    /**
+     * Gets an {@link Optional} holding the {@link Attachment}
+     *
+     * @return an {@link Optional} holding the {@link Attachment}
+     */
     public Optional<Attachment> getAttachment() {
         return Optional.ofNullable(attachment);
     }

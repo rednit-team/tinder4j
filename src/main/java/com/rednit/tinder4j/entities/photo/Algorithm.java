@@ -7,8 +7,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * This class contains all wrapped algorithm models.
+ *
+ * @author Kaktushose
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 public class Algorithm {
 
+    /**
+     * A Facial Scope contains coordinates to locate faces inside a photo.
+     *
+     * @author Kaktushose
+     * @version 1.0.0
+     * @since 1.0.0
+     */
     public static class FacialScope {
 
         private final double widthPct;
@@ -40,6 +54,13 @@ public class Algorithm {
         }
     }
 
+    /**
+     * A Face inside a photo.
+     *
+     * @author Kaktushose
+     * @version 1.0.0
+     * @since 1.0.0
+     */
     public static class Face {
 
         private final FacialScope algorithm;
@@ -59,6 +80,13 @@ public class Algorithm {
         }
     }
 
+    /**
+     * Photo metadata and information about faces and used algorithms.
+     *
+     * @author Kaktushose
+     * @version 1.0.0
+     * @since 1.0.0
+     */
     public static class CropInfo {
 
         private final boolean userCustomized;
@@ -111,6 +139,13 @@ public class Algorithm {
         }
     }
 
+    /**
+     * A photo hash.
+     *
+     * @author Kaktushose
+     * @version 1.0.0
+     * @since 1.0.0
+     */
     public static class Hash {
 
         private final String version;
