@@ -21,7 +21,7 @@ jobs:
       - name: Move Files
         run: |
           mv ./target/site/apidocs ../docs
-          rm -r ./
+          rm -rf ./
           mv ../docs* ./
       - name: Commit & Push Changes
         run: |
