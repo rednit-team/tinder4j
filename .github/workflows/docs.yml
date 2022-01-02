@@ -20,7 +20,7 @@ jobs:
         run: git checkout docs
       - name: Move Files
         run: |
-          move ./target/site/apidocs ../docs
+          mv ./target/site/apidocs ../docs
       - name: Commit & Push Changes
         run: |
           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
