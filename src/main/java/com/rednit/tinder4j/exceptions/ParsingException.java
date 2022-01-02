@@ -1,4 +1,4 @@
-package com.rednit.tinder4j.internal.exceptions;
+package com.rednit.tinder4j.exceptions;
 
 public class ParsingException extends RuntimeException {
 

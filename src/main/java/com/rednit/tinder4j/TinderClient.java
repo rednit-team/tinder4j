@@ -1,6 +1,5 @@
 package com.rednit.tinder4j;
 
-import com.rednit.tinder4j.entities.Match;
 import com.rednit.tinder4j.entities.Update;
 import com.rednit.tinder4j.entities.user.LikePreview;
 import com.rednit.tinder4j.entities.user.SelfUser;
@@ -9,6 +8,7 @@ import com.rednit.tinder4j.entities.user.swipeable.Recommendation;
 import com.rednit.tinder4j.entities.user.swipeable.UserProfile;
 import com.rednit.tinder4j.internal.async.RestAction;
 import com.rednit.tinder4j.internal.async.RestActionImpl;
+import com.rednit.tinder4j.exceptions.LoginException;
 import com.rednit.tinder4j.internal.requests.DataArray;
 import com.rednit.tinder4j.internal.requests.DataObject;
 import com.rednit.tinder4j.internal.requests.Requester;
@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +38,11 @@ public class TinderClient {
         this.requester = new Requester(token);
         callbackPool = ForkJoinPool.commonPool();
         matchCache = new MatchCacheView(this);
+        try {
+            getSelfUser().complete();
+        } catch (CompletionException ignored) {
+            throw new LoginException("The provided token is invalid!");
+        }
     }
 
     public void awaitShutdown() {

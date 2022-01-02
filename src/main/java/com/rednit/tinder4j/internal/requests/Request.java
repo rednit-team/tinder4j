@@ -4,7 +4,7 @@ import com.rednit.tinder4j.TinderClient;
 import com.rednit.tinder4j.internal.async.CallbackContext;
 import com.rednit.tinder4j.internal.async.RestAction;
 import com.rednit.tinder4j.internal.async.RestActionImpl;
-import com.rednit.tinder4j.internal.exceptions.HttpStatusCodeException;
+import com.rednit.tinder4j.exceptions.HttpStatusCodeException;
 import okhttp3.RequestBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

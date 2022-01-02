@@ -3,7 +3,7 @@ package com.rednit.tinder4j.internal.requests;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rednit.tinder4j.internal.exceptions.ParsingException;
+import com.rednit.tinder4j.exceptions.ParsingException;
 
 import java.io.IOException;
 import java.io.InputStream;
