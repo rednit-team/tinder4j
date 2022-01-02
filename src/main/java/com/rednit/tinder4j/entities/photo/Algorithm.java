@@ -11,31 +11,31 @@ public class Algorithm {
 
     public static class FacialScope {
 
-        private final float widthPct;
-        private final float xOffsetPct;
-        private final float heightPct;
-        private final float yOffsetPct;
+        private final double widthPct;
+        private final double xOffsetPct;
+        private final double heightPct;
+        private final double yOffsetPct;
 
         public FacialScope(DataObject scope) {
-            widthPct = scope.getFloat("width_pct");
-            xOffsetPct = scope.getFloat("x_offset_pct");
-            heightPct = scope.getFloat("height_pct");
-            yOffsetPct = scope.getFloat("y_offset_pct");
+            widthPct = scope.getDouble("width_pct");
+            xOffsetPct = scope.getDouble("x_offset_pct");
+            heightPct = scope.getDouble("height_pct");
+            yOffsetPct = scope.getDouble("y_offset_pct");
         }
 
-        public float getWidthPct() {
+        public double getWidthPct() {
             return widthPct;
         }
 
-        public float getXOffsetPct() {
+        public double getXOffsetPct() {
             return xOffsetPct;
         }
 
-        public float getHeightPct() {
+        public double getHeightPct() {
             return heightPct;
         }
 
-        public float getYOffsetPct() {
+        public double getYOffsetPct() {
             return yOffsetPct;
         }
     }
@@ -43,33 +43,31 @@ public class Algorithm {
     public static class Face {
 
         private final FacialScope algorithm;
-        private final float boundingBoxPercentage;
+        private final double boundingBoxPercentage;
 
         public Face(DataObject face) {
             algorithm = new FacialScope(face.getObject("algo"));
-            boundingBoxPercentage = face.getFloat("bounding_box_percentage");
+            boundingBoxPercentage = face.getDouble("bounding_box_percentage");
         }
 
         public FacialScope getAlgorithm() {
             return algorithm;
         }
 
-        public float getBoundingBoxPercentage() {
+        public double getBoundingBoxPercentage() {
             return boundingBoxPercentage;
         }
     }
 
     public static class CropInfo {
 
-        private final float boundingBoxPercentage;
         private final boolean userCustomized;
-        private final List<FacialScope> faces;
+        private final List<Face> faces;
         private final FacialScope user;
         private final FacialScope algorithm;
 
         @SuppressWarnings("unchecked")
         public CropInfo(DataObject cropInfo) {
-            boundingBoxPercentage = cropInfo.getFloat("bounding_box_percentage");
             userCustomized = cropInfo.getBoolean("user_customized");
 
             if (cropInfo.hasKey("user")) {
@@ -87,13 +85,9 @@ public class Algorithm {
             faces = new ArrayList<>();
             if (cropInfo.hasKey("faces")) {
                 cropInfo.getArray("faces").forEach(object ->
-                        faces.add(new FacialScope(new DataObject((Map<String, Object>) object)))
+                        faces.add(new Face(new DataObject((Map<String, Object>) object)))
                 );
             }
-        }
-
-        public float getBoundingBoxPercentage() {
-            return boundingBoxPercentage;
         }
 
         public boolean isUserCustomized() {
@@ -104,7 +98,7 @@ public class Algorithm {
             return !faces.isEmpty();
         }
 
-        public List<FacialScope> getFaces() {
+        public List<Face> getFaces() {
             return faces;
         }
 

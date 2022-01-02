@@ -12,7 +12,7 @@ public class MatchPhoto extends GenericPhoto {
     private final List<SizedImage> assets;
     private final int webpQf;
     private final int rank;
-    private final float score;
+    private final double score;
     private final int winCount;
 
     @SuppressWarnings("unchecked")
@@ -22,10 +22,17 @@ public class MatchPhoto extends GenericPhoto {
         photo.getArray("assets").forEach(object ->
                 assets.add(new SizedImage(new DataObject((Map<String, Object>) object)))
         );
-        webpQf = photo.getInteger("webp_qf");
-        rank = photo.getInteger("rank");
-        score = photo.getFloat("score");
-        winCount = photo.getInteger("win_count");
+        if (getType().equals("image")) {
+            webpQf = (int) photo.get("webp_qf", List.class).get(0);
+            rank = photo.getInteger("rank");
+            score = photo.getDouble("score");
+            winCount = photo.getInteger("win_count");
+        } else {
+            webpQf = 0;
+            rank = 0;
+            score = 0;
+            winCount = 0;
+        }
     }
 
     public boolean hasAssets() {
@@ -44,7 +51,7 @@ public class MatchPhoto extends GenericPhoto {
         return rank;
     }
 
-    public float getScore() {
+    public double getScore() {
         return score;
     }
 

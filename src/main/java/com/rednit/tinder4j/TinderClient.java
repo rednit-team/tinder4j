@@ -47,8 +47,8 @@ public class TinderClient {
     }
 
     public RestAction<Update> getUpdates(@Nullable String lastActivityDate) {
-        if (lastActivityDate == null) {
-            lastActivityDate = new SimpleDateFormat("yyyy-MMMM-ddTHH:mm:ss.00Z").format(new Date());
+        if (lastActivityDate == null || "".equals(lastActivityDate)) {
+            lastActivityDate = new SimpleDateFormat("yyyy-MMMM-dd'T'HH:mm:ss.00Z").format(new Date());
         }
         RequestBody body = RequestBody.create(
                 DataObject.empty()

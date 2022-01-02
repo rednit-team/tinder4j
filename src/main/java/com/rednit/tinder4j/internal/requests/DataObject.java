@@ -96,6 +96,10 @@ public class DataObject {
         return get(key, Long.class);
     }
 
+    public Double getDouble(String key) {
+        return get(key, Double.class);
+    }
+
     public Float getFloat(String key) {
         return get(key, Float.class);
     }

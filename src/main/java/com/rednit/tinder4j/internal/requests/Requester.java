@@ -43,8 +43,10 @@ public class Requester {
                 break;
             case POST:
                 builder.post(request.getBody());
+                break;
             case DELETE:
                 builder.delete();
+                break;
             default:
                 throw new UnsupportedOperationException("Unsupported request method!");
         }

@@ -38,7 +38,7 @@ public class MatchedUser extends GenericUser {
             isTravelling = false;
         }
         photos = new ArrayList<>();
-        user.getArray("badges").forEach(object ->
+        user.getArray("photos").forEach(object ->
                 photos.add(new MatchPhoto(new DataObject((Map<String, Object>) object), client))
         );
     }

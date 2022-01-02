@@ -37,12 +37,14 @@ public abstract class GenericUser extends Entity {
         gender = Gender.fromId(user.getInteger("gender"));
 
         badges = new ArrayList<>();
-        user.getArray("badges").forEach(object ->
-                badges.add(new DataObject((Map<String, Object>) object).getString("type"))
-        );
+        if (user.hasKey("badges")) {
+            user.getArray("badges").forEach(object ->
+                    badges.add(new DataObject((Map<String, Object>) object).getString("type"))
+            );
+        }
 
         photos = new ArrayList<>();
-        user.getArray("badges").forEach(object ->
+        user.getArray("photos").forEach(object ->
                 photos.add(new GenericPhoto(new DataObject((Map<String, Object>) object), client))
         );
     }
@@ -74,7 +76,7 @@ public abstract class GenericUser extends Entity {
         }
         int birthYear = Integer.parseInt(birthdate.substring(0, 4));
         int year = Calendar.getInstance().get(Calendar.YEAR);
-        return year - birthYear;
+        return year - birthYear - 1; // I don't understand Tinder's age calculation, but -1 seems to fix my solution
     }
 
     public String getName() {

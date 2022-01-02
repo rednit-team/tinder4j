@@ -30,7 +30,7 @@ public class MatchCacheView implements Iterable<Match> {
         ).collect(Collectors.toList());
         if (filtered.size() == 0) {
             return new RestActionImpl<>(client, Route.Match.GET_MATCH.compile(id), (response, request) ->
-                    new Match(DataObject.fromJson(response.body()), client)
+                    new Match(DataObject.fromJson(response.body()).getObject("data"), client)
             );
         }
         return new CompletedRestAction<>(filtered.get(0));

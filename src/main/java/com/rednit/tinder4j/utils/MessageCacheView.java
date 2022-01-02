@@ -24,6 +24,7 @@ public class MessageCacheView implements Iterable<Message> {
         messages = new LinkedList<>();
         this.matchId = matchId;
         this.client = client;
+        initialFetchDone = false;
     }
 
     public RestAction<Message> getMessage(String id) {
@@ -41,8 +42,8 @@ public class MessageCacheView implements Iterable<Message> {
         if (initialFetchDone) {
             return new CompletedRestAction<>(new ArrayList<>(messages));
         }
-        return new RestActionImpl<>(client, Route.Match.GET_MESSAGES.compile(matchId), (response, request) -> {
-            DataObject data = DataObject.fromJson(response.body());
+        return new RestActionImpl<>(client, Route.Match.GET_MESSAGES.compile(matchId, 60), (response, request) -> {
+            DataObject data = DataObject.fromJson(response.body()).getObject("data");
             data.getArray("messages").forEach(object ->
                     messages.addFirst(new Message(new DataObject((Map<String, Object>) object), client))
             );
