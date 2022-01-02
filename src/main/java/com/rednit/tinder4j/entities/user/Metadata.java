@@ -26,7 +26,7 @@ public class Metadata {
             prompt = descriptor.getString("prompt");
             iconUrl = descriptor.getString("icon_url");
             iconUrls = new ArrayList<>();
-            descriptor.getArray("icon_url").forEach(object ->
+            descriptor.getArray("icon_urls").forEach(object ->
                     iconUrls.add(new SizedImage(new DataObject((Map<String, Object>) object)))
             );
             if (descriptor.hasKey("choice_selection")) {
@@ -68,12 +68,12 @@ public class Metadata {
 
         public Job(DataObject job) {
             if (job.hasKey("company")) {
-                company = job.getString("company");
+                company = job.getObject("company").getString("name");
             } else {
                 company = null;
             }
             if (job.hasKey("title")) {
-                title = job.getString("title");
+                title = job.getObject("title").getString("name");
             } else {
                 title = null;
             }
@@ -90,25 +90,25 @@ public class Metadata {
 
     public static class Position {
 
-        private final int at;
-        private final float latitude;
-        private final float longitude;
+        private final long at;
+        private final double latitude;
+        private final double longitude;
 
         public Position(DataObject position) {
-            at = position.getInteger("at");
-            latitude = position.getFloat("lat");
-            longitude = position.getFloat("lon");
+            at = position.getLong("at");
+            latitude = position.getDouble("lat");
+            longitude = position.getDouble("lon");
         }
 
-        public int getAt() {
+        public long getAt() {
             return at;
         }
 
-        public float getLatitude() {
+        public double getLatitude() {
             return latitude;
         }
 
-        public float getLongitude() {
+        public double getLongitude() {
             return longitude;
         }
     }

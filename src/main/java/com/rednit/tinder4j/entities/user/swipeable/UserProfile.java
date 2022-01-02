@@ -20,9 +20,11 @@ public class UserProfile extends SwipeableUser {
     public UserProfile(DataObject user, TinderClient client) {
         super(user, client);
         sexualOrientations = new ArrayList<>();
-        user.getArray("sexual_orientations").forEach(object ->
-            sexualOrientations.add(new DataObject((Map<String, Object>) object).getString("name"))
-        );
+        if (user.hasKey("sexual_orientations")) {
+            user.getArray("sexual_orientations").forEach(object ->
+                    sexualOrientations.add(new DataObject((Map<String, Object>) object).getString("name"))
+            );
+        }
         if (user.hasKey("hide_distance")) {
             hideDistance = user.getBoolean("hide_distance");
         } else {

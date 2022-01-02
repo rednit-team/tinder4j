@@ -20,7 +20,7 @@ public abstract class SwipeableUser extends GenericUser {
     private final String school;
     private final String city;
     private final int distance;
-    private final int sNumber;
+    private final long sNumber;
     private final List<Metadata.Teaser> teasers;
     private final List<String> interests;
     private final List<Metadata.Descriptor> descriptors;
@@ -31,8 +31,12 @@ public abstract class SwipeableUser extends GenericUser {
     @SuppressWarnings("unchecked")
     protected SwipeableUser(DataObject user, TinderClient client) {
         super(user, client);
-        job = new Metadata.Job(user.getObject("jobs"));
-        if (!user.getArray("school").isEmpty()) {
+        if (!user.getArray("jobs").isEmpty()) {
+            job = new Metadata.Job(user.getArray("jobs").getObject(0));
+        } else {
+            job = null;
+        }
+        if (!user.isNull("school")) {
             school = user.getArray("schools").getObject(0).getString("name");
         } else {
             school = null;
@@ -43,7 +47,7 @@ public abstract class SwipeableUser extends GenericUser {
             city = null;
         }
         distance = user.getInteger("distance_mi");
-        sNumber = user.getInteger("s_number");
+        sNumber = user.getLong("s_number");
         teasers = new ArrayList<>();
         user.getArray("teasers").forEach(object ->
                 teasers.add(new Metadata.Teaser(new DataObject((Map<String, Object>) object)))
@@ -78,8 +82,8 @@ public abstract class SwipeableUser extends GenericUser {
         }
     }
 
-    public Metadata.Job getJob() {
-        return job;
+    public Optional<Metadata.Job> getJob() {
+        return Optional.ofNullable(job);
     }
 
     public Optional<String> getSchool() {
@@ -98,7 +102,7 @@ public abstract class SwipeableUser extends GenericUser {
         return distance * 1.609344f;
     }
 
-    public int getsNumber() {
+    public long getsNumber() {
         return sNumber;
     }
 

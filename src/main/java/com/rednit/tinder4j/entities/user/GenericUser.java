@@ -51,7 +51,7 @@ public abstract class GenericUser extends Entity {
 
     public RestAction<UserProfile> getUserProfile() {
         return new RestActionImpl<>(getClient(), Route.User.GET_USER.compile(getId()), (response, request) ->
-                new UserProfile(DataObject.fromJson(response.body()), getClient())
+                new UserProfile(DataObject.fromJson(response.body()).getObject("results"), getClient())
         );
     }
 

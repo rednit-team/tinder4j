@@ -20,7 +20,7 @@ public class Spotify {
             id = album.getString("id");
             name = album.getString("name");
             images = new ArrayList<>();
-            album.getArray("processedFiles").forEach(object ->
+            album.getArray("images").forEach(object ->
                     images.add(new SizedImage(new DataObject((Map<String, Object>) object)))
             );
         }

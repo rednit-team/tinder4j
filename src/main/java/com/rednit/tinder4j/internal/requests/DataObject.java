@@ -97,6 +97,10 @@ public class DataObject {
     }
 
     public Double getDouble(String key) {
+        Object object = get(key);
+        if (object instanceof Integer) {
+            return getInteger(key).doubleValue();
+        }
         return get(key, Double.class);
     }
 

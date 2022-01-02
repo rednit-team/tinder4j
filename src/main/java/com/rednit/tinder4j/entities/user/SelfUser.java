@@ -45,12 +45,12 @@ public class SelfUser extends GenericUser {
         }
 
         interestedIn = new HashSet<>();
-        for (int gender : user.get("interested_in", int[].class)) {
-            interestedIn.add(Gender.fromId(gender));
+        for (Object gender : user.get("interested_in", List.class)) {
+            interestedIn.add(Gender.fromId((int) gender));
         }
 
-        if (user.hasKey("jobs")) {
-            job = new Metadata.Job(user.getObject("jobs"));
+        if (!user.getArray("jobs").isEmpty()) {
+            job = new Metadata.Job(user.getArray("jobs").getObject(0));
         } else {
             job = null;
         }
@@ -60,7 +60,7 @@ public class SelfUser extends GenericUser {
         position = new Metadata.Position(user.getObject("pos"));
         positionInfo = new Metadata.PositionInfo(user.getObject("pos_info"));
 
-        if (!user.getArray("school").isEmpty()) {
+        if (!user.isNull("school")) {
             school = user.getArray("schools").getObject(0).getString("name");
         } else {
             school = null;

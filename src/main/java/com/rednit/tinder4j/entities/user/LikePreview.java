@@ -18,7 +18,7 @@ public class LikePreview extends Entity {
     public LikePreview(DataObject entity, TinderClient client) {
         super(entity, client);
         photos = new ArrayList<>();
-        entity.getArray("badges").forEach(object ->
+        entity.getArray("photos").forEach(object ->
                 photos.add(new GenericPhoto(new DataObject((Map<String, Object>) object), client))
         );
         if (entity.hasKey("recently_active")) {
