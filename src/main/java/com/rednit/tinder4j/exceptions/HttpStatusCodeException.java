@@ -1,7 +1,7 @@
 package com.rednit.tinder4j.exceptions;
 
 /**
- * RuntimeException thrown when a non-ok http status code occurs. Non-ok means <em>200 <= code < 300</em> except for
+ * RuntimeException thrown when a non-ok http status code occurs. Non-ok means <em>200 &lt;= code &lt; 300</em> except for
  * <em>429</em>.
  *
  * @author Kaktushose

@@ -27,23 +27,19 @@ import java.util.concurrent.TimeUnit;
 /**
  * The entry point to interact with the Tinder API. This class supports the most common endpoints that are needed to
  * interact with Tinder.
- * <p>
  * <h1>Authentication</h1>
  * Tinder uses Basic Authentication with UUID strings. To get your token, first login to Tinder in your browser.
  * Then, open the network tab and filter for api.gotinder.com. Choose any GET or POST request and go to the Request
  * Headers. There, you'll find the X-Auth-Token header containing the auth token. Please note: you might need to perform
  * some actions first (for example liking a user) before you see any requests.
- * </p><p>
  * <h1>Rate Limiting</h1>
  * The Tinder API has no official rate limiting, but API spamming results in extra verification needed, shadow-bans
  * or complete account suspension. Thus, the default Ratelimiter of the library is pretty restrictive.
  * Use {@link #setRatelimiter(Ratelimiter) } to use your own Ratelimiter implementation.
- * </p><p>
  * <h1>Runtime</h1>
  * The client will terminate as soon as all pending API requests where sent. If you want to use this library for bots
  * or similar you have to keep the JVM or respectively the client alive by yourself. <b>This also results in callback
  * threads being killed before their execution is finished. Call {@link #awaitShutdown()} to prevent this behaviour.</b>
- * </p>
  *
  * @author Kaktushose
  * @version 1.0.0
