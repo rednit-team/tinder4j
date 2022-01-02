@@ -21,6 +21,8 @@ jobs:
       - name: Move Files
         run: |
           mv ./target/site/apidocs ../docs
+          rm -r ./
+          mv ../docs* ./
       - name: Commit & Push Changes
         run: |
           git config --global user.email 41898282+github-actions[bot]@users.noreply.github.com
