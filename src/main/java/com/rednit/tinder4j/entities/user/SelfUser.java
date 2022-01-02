@@ -35,7 +35,7 @@ public class SelfUser extends GenericUser {
         ageFilterMax = user.getInteger("age_filter_max");
         createDate = user.getString("create_date");
         distanceFilter = user.getInteger("distance_filter");
-        genderFilter = Gender.values()[user.getInteger("gender_filter")];
+        genderFilter = Gender.fromId(user.getInteger("gender_filter"));
         email = user.getString("email");
 
         if (user.hasKey("instagram")) {
@@ -46,7 +46,7 @@ public class SelfUser extends GenericUser {
 
         interestedIn = new HashSet<>();
         for (int gender : user.get("interested_in", int[].class)) {
-            interestedIn.add(Gender.values()[gender]);
+            interestedIn.add(Gender.fromId(gender));
         }
 
         if (user.hasKey("jobs")) {

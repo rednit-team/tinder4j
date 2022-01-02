@@ -15,4 +15,12 @@ public enum Gender {
     public int getId() {
         return id;
     }
+
+    public static Gender fromId(int id) {
+        switch (id) {
+            case 0: return MALE;
+            case 1: return FEMALE;
+            default: return HIDDEN;
+        }
+    }
 }

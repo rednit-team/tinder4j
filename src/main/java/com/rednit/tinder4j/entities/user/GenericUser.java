@@ -34,7 +34,7 @@ public abstract class GenericUser extends Entity {
 
         birthdate = user.getString("birth_date");
         name = user.getString("name");
-        gender = Gender.valueOf(user.getString("gender").toUpperCase());
+        gender = Gender.fromId(user.getInteger("gender"));
 
         badges = new ArrayList<>();
         user.getArray("badges").forEach(object ->
