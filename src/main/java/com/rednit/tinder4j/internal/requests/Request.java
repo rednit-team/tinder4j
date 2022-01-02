@@ -73,4 +73,9 @@ public class Request<T> {
     public void handleResponse(Response response) {
         restAction.handleResponse(response, this);
     }
+
+    public TinderClient getClient() {
+        return restAction.getTinderClient();
+    }
+
 }

@@ -22,8 +22,13 @@ public class MatchPhoto extends GenericPhoto {
         photo.getArray("assets").forEach(object ->
                 assets.add(new SizedImage(new DataObject((Map<String, Object>) object)))
         );
+
         if (getType().equals("image")) {
-            webpQf = (int) photo.get("webp_qf", List.class).get(0);
+            if (!photo.hasKey("webp_qf")) {
+               webpQf = 0;
+            } else {
+                webpQf = (int) photo.get("webp_qf", List.class).get(0);
+            }
             rank = photo.getInteger("rank");
             score = photo.getDouble("score");
             winCount = photo.getInteger("win_count");

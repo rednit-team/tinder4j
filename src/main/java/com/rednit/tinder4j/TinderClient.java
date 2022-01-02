@@ -9,10 +9,7 @@ import com.rednit.tinder4j.entities.user.swipeable.UserProfile;
 import com.rednit.tinder4j.internal.async.RestAction;
 import com.rednit.tinder4j.internal.async.RestActionImpl;
 import com.rednit.tinder4j.exceptions.LoginException;
-import com.rednit.tinder4j.internal.requests.DataArray;
-import com.rednit.tinder4j.internal.requests.DataObject;
-import com.rednit.tinder4j.internal.requests.Requester;
-import com.rednit.tinder4j.internal.requests.Route;
+import com.rednit.tinder4j.internal.requests.*;
 import com.rednit.tinder4j.utils.MatchCacheView;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -33,11 +30,13 @@ public class TinderClient {
     private final Requester requester;
     private final ForkJoinPool callbackPool;
     private final MatchCacheView matchCache;
+    private Ratelimiter ratelimiter;
 
     public TinderClient(String token) {
         this.requester = new Requester(token);
         callbackPool = ForkJoinPool.commonPool();
         matchCache = new MatchCacheView(this);
+        ratelimiter = new DefaultRatelimiter();
         try {
             getSelfUser().complete();
         } catch (CompletionException ignored) {
@@ -138,5 +137,13 @@ public class TinderClient {
 
     public ExecutorService getCallbackPool() {
         return callbackPool;
+    }
+
+    public Ratelimiter getRatelimiter() {
+        return ratelimiter;
+    }
+
+    public void setRatelimiter(Ratelimiter ratelimiter) {
+        this.ratelimiter = ratelimiter;
     }
 }

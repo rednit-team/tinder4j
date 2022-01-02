@@ -51,6 +51,21 @@ public class Requester {
             default:
                 throw new UnsupportedOperationException("Unsupported request method!");
         }
+
+        Ratelimiter ratelimiter = request.getClient().getRatelimiter();
+        if (ratelimiter.shouldDelay(request)) {
+            synchronized (this) {
+                try {
+                    long timeout = ratelimiter.getDelay(request);
+                    log.debug("Too many requests. Waiting for {} ms", timeout);
+                    wait(timeout);
+                    log.debug("Continuing...");
+                } catch (InterruptedException e) {
+                    log.error("An exception occurred while rate limiting!", e);
+                }
+            }
+        }
+
         Response response;
         try {
             okhttp3.Response data = httpClient.newCall(builder.build()).execute();
@@ -68,6 +83,7 @@ public class Requester {
                     log.debug("Too many requests. Waiting for {} secs", timeout);
                     wait(timeout * 1000L);
                     log.debug("Reattempting...");
+                    request(request);
                 } catch (InterruptedException e) {
                     log.error("An exception occurred while rate limiting!", e);
                 }
