@@ -11,9 +11,7 @@ import com.rednit.tinder4j.internal.requests.Route;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class GenericUser extends Entity {
 
@@ -51,7 +49,7 @@ public abstract class GenericUser extends Entity {
 
     public RestAction<UserProfile> getUserProfile() {
         return new RestActionImpl<>(getClient(), Route.User.GET_USER.compile(getId()), (response, request) ->
-             new UserProfile(DataObject.fromJson(response.body()), getClient())
+                new UserProfile(DataObject.fromJson(response.body()), getClient())
         );
     }
 
@@ -68,6 +66,15 @@ public abstract class GenericUser extends Entity {
 
     public String getBirthdate() {
         return birthdate;
+    }
+
+    public int getAge() {
+        if (birthdate.length() < 4) {
+            throw new UnsupportedOperationException("Birthdate is unavailable!");
+        }
+        int birthYear = Integer.parseInt(birthdate.substring(0, 4));
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        return year - birthYear;
     }
 
     public String getName() {

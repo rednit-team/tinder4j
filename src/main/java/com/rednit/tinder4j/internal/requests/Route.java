@@ -25,9 +25,11 @@ public class Route {
                 Method.GET, "/v2/fast-match/teaser?type=recently-active"
         );
         public static final Route GET_MATCHES = new Route(
+                Method.GET, "/v2/matches?count={count}"
+        );
+        public static final Route GET_MATCHES_PAGE = new Route(
                 Method.GET, "/v2/matches?count={count}&page_token={page_token}"
         );
-
     }
 
     public static class User {

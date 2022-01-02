@@ -165,6 +165,7 @@ public class Match extends Entity {
     }
 
     public RestAction<Void> delete() {
+        getClient().getMatchCacheView().remove(getId());
         return new RestActionImpl<>(getClient(), Route.Match.DELETE_MATCH.compile(getId()));
     }
 }

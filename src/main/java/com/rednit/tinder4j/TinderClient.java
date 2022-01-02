@@ -13,6 +13,7 @@ import com.rednit.tinder4j.internal.requests.DataArray;
 import com.rednit.tinder4j.internal.requests.DataObject;
 import com.rednit.tinder4j.internal.requests.Requester;
 import com.rednit.tinder4j.internal.requests.Route;
+import com.rednit.tinder4j.utils.MatchCacheView;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import org.jetbrains.annotations.Nullable;
@@ -30,10 +31,12 @@ public class TinderClient {
 
     private final Requester requester;
     private final ForkJoinPool callbackPool;
+    private final MatchCacheView matchCache;
 
     public TinderClient(String token) {
         this.requester = new Requester(token);
         callbackPool = ForkJoinPool.commonPool();
+        matchCache = new MatchCacheView(this);
     }
 
     public void awaitShutdown() {
@@ -84,14 +87,8 @@ public class TinderClient {
         });
     }
 
-    public void loadAllMatches() {
-
-    }
-
-    public RestAction<Match> getMatch(String id) {
-        return new RestActionImpl<>(this, Route.Match.GET_MATCH.compile(id), (response, request) ->
-                new Match(DataObject.fromJson(response.body()), this)
-        );
+    public MatchCacheView getMatchCacheView() {
+        return matchCache;
     }
 
     public RestAction<UserProfile> getUserProfile(String id) {
