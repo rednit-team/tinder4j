@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Requester {
 
@@ -50,11 +51,29 @@ public class Requester {
             default:
                 throw new UnsupportedOperationException("Unsupported request method!");
         }
+        Response response;
         try {
-            okhttp3.Response response = httpClient.newCall(builder.build()).execute();
-            request.handleResponse(new Response(response));
+            okhttp3.Response data = httpClient.newCall(builder.build()).execute();
+            response = new Response(data);
         } catch (IOException e) {
             request.onFailure(e);
+            return;
+        }
+        if (response.isOk()) {
+            request.handleResponse(response);
+        } else if (response.isRateLimit()) {
+            synchronized (this) {
+                try {
+                    int timeout = (int) (ThreadLocalRandom.current().nextFloat() * 10 + 1);
+                    log.debug("Too many requests. Waiting for {} secs", timeout);
+                    wait(timeout * 1000L);
+                    log.debug("Reattempting...");
+                } catch (InterruptedException e) {
+                    log.error("An exception occurred while rate limiting!", e);
+                }
+            }
+        } else {
+            request.onFailure(response);
         }
     }
 }
