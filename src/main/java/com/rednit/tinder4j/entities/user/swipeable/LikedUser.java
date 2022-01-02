@@ -27,4 +27,9 @@ public class LikedUser extends SwipeableUser {
     public long getExpireTime() {
         return expireTime;
     }
+
+    @Override
+    public String toString() {
+        return String.format("LikedUser{id: %s / name: %s}", getId(), getName());
+    }
 }

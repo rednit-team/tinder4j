@@ -63,4 +63,9 @@ public class UserProfile extends SwipeableUser {
     public boolean isTravelling() {
         return isTravelling;
     }
+
+    @Override
+    public String toString() {
+        return String.format("UserProfile{id: %s / name: %s}", getId(), getName());
+    }
 }

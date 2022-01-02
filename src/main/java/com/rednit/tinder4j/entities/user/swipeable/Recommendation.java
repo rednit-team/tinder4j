@@ -21,4 +21,9 @@ public class Recommendation extends SwipeableUser {
     public String getContentHash() {
         return contentHash;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Recommendation{id: %s / name: %s}", getId(), getName());
+    }
 }

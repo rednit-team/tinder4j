@@ -66,4 +66,9 @@ public class MatchedUser extends GenericUser {
     public List<MatchPhoto> getMatchPhotos() {
         return photos;
     }
+
+    @Override
+    public String toString() {
+        return String.format("MatchedUser{id: %s / name: %s}", getId(), getName());
+    }
 }

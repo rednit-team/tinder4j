@@ -59,4 +59,9 @@ public class GenericPhoto extends Entity {
     public String getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return String.format("GenericPhoto{id: %s / url: %s}", getId(), url);
+    }
 }

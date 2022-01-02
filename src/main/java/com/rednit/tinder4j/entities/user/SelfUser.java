@@ -183,4 +183,8 @@ public class SelfUser extends GenericUser {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return String.format("SelfUser{id: %s / name: %s}", getId(), getName());
+    }
 }

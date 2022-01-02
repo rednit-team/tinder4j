@@ -141,4 +141,9 @@ public abstract class SwipeableUser extends GenericUser {
     public RestAction<Void> superlike() {
         return new RestActionImpl<>(getClient(), Route.User.SUPERLIKE.compile(getId()));
     }
+
+    @Override
+    public String toString() {
+        return String.format("SwipeableUser{id: %s / name: %s}", getId(), getName());
+    }
 }

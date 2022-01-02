@@ -26,4 +26,9 @@ public abstract class Entity {
     public TinderClient getClient() {
         return client;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Entity{id: %s}", id);
+    }
 }

@@ -81,4 +81,9 @@ public class Message extends Entity {
     public Optional<Attachment> getAttachment() {
         return Optional.ofNullable(attachment);
     }
+
+    @Override
+    public String toString() {
+        return String.format("Message{id: %s / content: %s}", getId(), content);
+    }
 }

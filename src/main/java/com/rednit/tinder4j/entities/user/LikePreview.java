@@ -35,4 +35,10 @@ public class LikePreview extends Entity {
     public boolean isRecentlyActive() {
         return recentlyActive;
     }
+
+
+    @Override
+    public String toString() {
+        return String.format("SelfUser{id: %s}", getId());
+    }
 }

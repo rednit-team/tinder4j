@@ -98,4 +98,9 @@ public abstract class GenericUser extends Entity {
     public List<GenericPhoto> getPhotos() {
         return photos;
     }
+
+    @Override
+    public String toString() {
+        return String.format("GenericUser{id: %s / name: %s}", getId(), getName());
+    }
 }

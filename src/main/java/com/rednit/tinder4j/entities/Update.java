@@ -61,5 +61,15 @@ public class Update {
         public String getMessageId() {
             return messageId;
         }
+
+        @Override
+        public String toString() {
+            return String.format("NewMessage{matchId: %s / messageId: %s}", matchId, messageId);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Update{newMatches: %d / newMessages: %d}", newMatches.size(), newMessages.size());
     }
 }

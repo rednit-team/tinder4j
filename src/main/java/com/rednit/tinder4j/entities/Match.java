@@ -168,4 +168,9 @@ public class Match extends Entity {
         getClient().getMatchCacheView().remove(getId());
         return new RestActionImpl<>(getClient(), Route.Match.DELETE_MATCH.compile(getId()));
     }
+
+    @Override
+    public String toString() {
+        return String.format("Match{id: %s / %s}", getId(), matchedUser);
+    }
 }

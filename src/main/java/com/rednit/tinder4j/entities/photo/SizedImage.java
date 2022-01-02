@@ -38,4 +38,9 @@ public class SizedImage {
     public Optional<String> getQuality() {
         return Optional.ofNullable(quality);
     }
+
+    @Override
+    public String toString() {
+        return String.format("SizedImage{url: %s}", url);
+    }
 }
