@@ -1,0 +1,62 @@
+@options
+@packages
+--class-path
+'/home/runner/work/tinder4j/tinder4j/target/classes:/home/runner/.m2/repository/org/slf4j/slf4j-api/1.7.32/slf4j-api-1.7.32.jar:/home/runner/.m2/repository/com/squareup/okhttp3/okhttp/4.9.3/okhttp-4.9.3.jar:/home/runner/.m2/repository/com/squareup/okio/okio/2.8.0/okio-2.8.0.jar:/home/runner/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.4.0/kotlin-stdlib-common-1.4.0.jar:/home/runner/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.4.10/kotlin-stdlib-1.4.10.jar:/home/runner/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/home/runner/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.13.1/jackson-core-2.13.1.jar:/home/runner/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.13.1/jackson-databind-2.13.1.jar:/home/runner/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.13.1/jackson-annotations-2.13.1.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'9'
+-sourcepath
+'/home/runner/work/tinder4j/tinder4j/src/main/java:/home/runner/work/tinder4j/tinder4j/target/generated-sources/annotations'
+-author
+-bottom
+'Copyright &#169; 2022. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'/home/runner/work/tinder4j/tinder4j/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'tinder4j 1.0.0 API'
+-linkoffline
+'https://docs.oracle.com/javase/9/docs/api' '/home/runner/work/tinder4j/tinder4j/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'tinder4j 1.0.0 API'
+com.rednit.tinder4j.internal.async
+com.rednit.tinder4j.internal.requests
+com.rednit.tinder4j
+com.rednit.tinder4j.utils
+com.rednit.tinder4j.exceptions
+com.rednit.tinder4j.entities.socials
+com.rednit.tinder4j.entities
+com.rednit.tinder4j.entities.user
+com.rednit.tinder4j.entities.user.swipeable
+com.rednit.tinder4j.entities.photo
+com.rednit.tinder4j.entities.message
+/home/runner/work/tinder4j/tinder4j/src/main/java = 1641155935389
+/home/runner/work/tinder4j/tinder4j/target/generated-sources/annotations = 1641155946445
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/serialized-form.html = 1641155960217
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/member-search-index.js = 1641155960457
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/search.js = 1641155960497
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/type-search-index.js = 1641155960453
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/index-all.html = 1641155960461
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/overview-summary.html = 1641155960489
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/package-search-index.js = 1641155960449
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/allpackages-index.html = 1641155960473
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/stylesheet.css = 1641155960497
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/member-search-index.zip = 1641155960457
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/allclasses.html = 1641155960485
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/help-doc.html = 1641155960489
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/script.js = 1641155960497
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/index.html = 1641155960489
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/element-list = 1641155960173
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/overview-tree.html = 1641155960353
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/type-search-index.zip = 1641155960453
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/constant-values.html = 1641155960209
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/deprecated-list.html = 1641155960477
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/package-search-index.zip = 1641155960453
+/home/runner/work/tinder4j/tinder4j/target/site/apidocs/allclasses-index.html = 1641155960469
