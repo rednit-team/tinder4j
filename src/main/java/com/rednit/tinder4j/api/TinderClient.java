@@ -11,7 +11,6 @@ import com.rednit.tinder4j.exceptions.LoginException;
 import com.rednit.tinder4j.api.requests.RestAction;
 import com.rednit.tinder4j.requests.*;
 import com.rednit.tinder4j.requests.async.RestActionImpl;
-import com.rednit.tinder4j.internal.requests.*;
 import com.rednit.tinder4j.api.cache.MatchCacheView;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
