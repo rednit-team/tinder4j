@@ -1,0 +1,12 @@
+com.rednit.tinder4j.api
+com.rednit.tinder4j.api.cache
+com.rednit.tinder4j.api.entities
+com.rednit.tinder4j.api.entities.message
+com.rednit.tinder4j.api.entities.photo
+com.rednit.tinder4j.api.entities.socials
+com.rednit.tinder4j.api.entities.user
+com.rednit.tinder4j.api.entities.user.swipeable
+com.rednit.tinder4j.api.requests
+com.rednit.tinder4j.exceptions
+com.rednit.tinder4j.requests
+com.rednit.tinder4j.requests.async
