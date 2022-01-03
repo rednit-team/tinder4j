@@ -19,7 +19,7 @@ jobs:
         run: git checkout docs
       - name: Move Files
         run: |
-          mv ./target/site/apidocs/ ./
+          mv ./target/site/apidocs/ ./docs
           rm -rf ./target
       - name: Commit & Push Changes
         run: |

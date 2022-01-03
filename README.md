@@ -6,9 +6,8 @@
 
 # Tinder4j
 
+<br>
 comprehensive and feature rich wrapper of the Tinder API
-
----
 
 **Note: This is an unofficial project, and I have nothing to do with Tinder nor their API. I take no responsibility for
  any potential damage, banned accounts or other troubles related to this project!** 
@@ -16,10 +15,19 @@ comprehensive and feature rich wrapper of the Tinder API
 ---
 
 ## Features
-- async and intuitive interface
+- asynchronous and intuitive interface
 - completely wrapped Tinder models
 - rate limiting
 - caching
+
+### Example 
+```java
+TinderClient client = new TinderClient("X-Auth-Token");
+client.getRecommendations().queue(recommendations -> recommendations.forEach(recommendation -> {
+    recommendation.like().queue();
+    System.out.println("Liked user " + recommendation.getName());
+});
+```
 
 ### Authentication 
 Tinder uses Basic Authentication with UUID strings. To get your token, first login to Tinder in your browser. Then,
