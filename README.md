@@ -6,8 +6,9 @@
 
 # Tinder4j
 
-<br>
 comprehensive and feature rich wrapper of the Tinder API
+
+<br>
 
 **Note: This is an unofficial project, and I have nothing to do with Tinder nor their API. I take no responsibility for
  any potential damage, banned accounts or other troubles related to this project!** 
@@ -61,7 +62,7 @@ client.setRatelimiter(new CustomRatelimiter());
 The client will terminate as soon as all pending API requests where sent. If you want to use this library for bots
 or similar you have to keep the JVM or respectively the client alive by yourself. **This also results in callback
 threads being killed before their execution is finished. Call 
-[`TinderClient#awaitShutdown`](https://rednit-team.github.io/tinder4j/com/rednit/tinder4j/api/TinderClient.html) to prevent 
+[`TinderClient#awaitShutdown`](https://rednit-team.github.io/tinder4j/com/rednit/tinder4j/api/TinderClient.html#awaitShutdown()) to prevent 
 this behaviour.**
 
 ## Download
