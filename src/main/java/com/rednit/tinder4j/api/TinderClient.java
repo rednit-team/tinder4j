@@ -155,6 +155,19 @@ public class TinderClient {
     }
 
     /**
+     * Gets the amount of received likes from the Tinder API.
+     *
+     * @return a {@link RestAction} holding the amount of received likes
+     */
+    public RestAction<Integer> getLikeCount() {
+        return new RestActionImpl<>(this, Route.Self.GET_LIKE_COUNT.compile(), (response, request) -> {
+            List<LikePreview> likePreviews = new ArrayList<>();
+            DataObject data = DataObject.fromJson(response.body());
+            return data.getObject("data").getInteger("count");
+        });
+    }
+
+    /**
      * Gets the {@link MatchCacheView}.
      *
      * @return the {@link MatchCacheView}

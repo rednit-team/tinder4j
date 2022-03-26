@@ -20,6 +20,7 @@ public class Route {
         public static final Route GET_RECOMMENDATIONS = new Route(Method.GET, "/user/recs");
         public static final Route GET_LIKED_USERS = new Route(Method.GET, "/v2/my-likes");
         public static final Route GET_LIKE_PREVIEWS = new Route(Method.GET, "/v2/fast-match/teasers");
+        public static final Route GET_LIKE_COUNT = new Route(Method.GET, "/v2/fast-match/count");
         public static final Route GET_MESSAGE = new Route(Method.GET, "/message/{id}");
         public static final Route GET_RECENTLY_ACTIVE = new Route(
                 Method.GET, "/v2/fast-match/teaser?type=recently-active"
