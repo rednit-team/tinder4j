@@ -71,7 +71,13 @@ public class SelfUser extends GenericUser {
 
         photoOptimizerEnabled = user.getBoolean("photo_optimizer_enabled");
         lastOnline = user.getString("ping_time");
-        position = new Metadata.Position(user.getObject("pos"));
+
+        if (!user.isNull("pos")) {
+            position = new Metadata.Position(user.getObject("pos"));
+        } else {
+            position = null;
+        }
+
         positionInfo = new Metadata.PositionInfo(user.getObject("pos_info"));
 
         if (!user.isNull("school")) {
@@ -191,10 +197,10 @@ public class SelfUser extends GenericUser {
     /**
      * Gets the {@link com.rednit.tinder4j.api.entities.user.Metadata.Position Position}.
      *
-     * @return the {@link com.rednit.tinder4j.api.entities.user.Metadata.Position Position}
+     * @return an {@link Optional} holding the {@link com.rednit.tinder4j.api.entities.user.Metadata.Position Position}
      */
-    public Metadata.Position getPosition() {
-        return position;
+    public Optional<Metadata.Position> getPosition() {
+        return Optional.ofNullable(position);
     }
 
     /**
