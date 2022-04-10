@@ -102,7 +102,7 @@ public class Route {
                 route = route.replaceAll(" ", "");
             }
             for (Object param : params) {
-                route = route.replaceFirst("\\{.+?(?=})}", param.toString());
+                route = route.replaceFirst("\\{.+?(?=\\})\\}", param.toString());
             }
 
             this.method = method;
