@@ -5,6 +5,7 @@ import com.rednit.tinder4j.api.requests.RestAction;
 import com.rednit.tinder4j.requests.Request;
 import com.rednit.tinder4j.requests.Response;
 import com.rednit.tinder4j.requests.Route;
+import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -20,13 +21,14 @@ public class RestActionImpl<T> implements RestAction<T> {
     private static final Consumer<Object> DEFAULT_SUCCESS = o -> {
     };
     private static final Consumer<? super Throwable> DEFAULT_FAILURE = t -> log.error("RestAction queue returned failure", t);
+    private static final RequestBody EMPTY_BODY = RequestBody.create("{}", MediaType.parse("application/json"));
     private final TinderClient client;
     private final Route.CompiledRoute route;
     private final RequestBody data;
     private final BiFunction<Response, Request<T>, T> handler;
 
     public RestActionImpl(TinderClient client, Route.CompiledRoute route) {
-        this(client, route, null, null);
+        this(client, route, EMPTY_BODY, null);
     }
 
     public RestActionImpl(TinderClient client, Route.CompiledRoute route, RequestBody data) {
@@ -34,7 +36,7 @@ public class RestActionImpl<T> implements RestAction<T> {
     }
 
     public RestActionImpl(TinderClient client, Route.CompiledRoute route, BiFunction<Response, Request<T>, T> handler) {
-        this(client, route, null, handler);
+        this(client, route, EMPTY_BODY, handler);
     }
 
     public RestActionImpl(TinderClient client, Route.CompiledRoute route, RequestBody data, BiFunction<Response, Request<T>, T> handler) {

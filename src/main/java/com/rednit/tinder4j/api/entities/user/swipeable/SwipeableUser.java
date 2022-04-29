@@ -5,9 +5,9 @@ import com.rednit.tinder4j.api.entities.socials.Spotify;
 import com.rednit.tinder4j.api.entities.user.GenericUser;
 import com.rednit.tinder4j.api.entities.user.Metadata;
 import com.rednit.tinder4j.api.requests.RestAction;
-import com.rednit.tinder4j.requests.async.RestActionImpl;
 import com.rednit.tinder4j.requests.DataObject;
 import com.rednit.tinder4j.requests.Route;
+import com.rednit.tinder4j.requests.async.RestActionImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -211,10 +211,17 @@ public abstract class SwipeableUser extends GenericUser {
     /**
      * Likes the user.
      *
-     * @return {@link RestAction}
+     * @return {@link RestAction} holding an {@link Optional} holding the match id,
+     * if present
      */
-    public RestAction<Void> like() {
-        return new RestActionImpl<>(getClient(), Route.User.LIKE.compile(getId()));
+    public RestAction<Optional<String>> like() {
+        return new RestActionImpl<>(getClient(), Route.User.LIKE.compile(getId()), ((response, request) -> {
+            DataObject object = DataObject.fromJson(response.body());
+            if (object.get("match") instanceof Boolean) {
+                return Optional.empty();
+            }
+            return Optional.of((object.getObject("match").getString("_id")));
+        }));
     }
 
     /**
