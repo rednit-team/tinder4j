@@ -89,9 +89,6 @@ public class SelfUser extends GenericUser {
         showGenderOnProfile = user.getBoolean("show_gender_on_profile");
         canCreateSquad = user.getBoolean("can_create_squad");
         photos = new ArrayList<>();
-        user.getArray("badges").forEach(object ->
-                photos.add(new ProfilePhoto(new DataObject((Map<String, Object>) object), client))
-        );
     }
 
     /**
